@@ -1,5 +1,25 @@
 import sys
+import json
+from datetime import datetime
 
-target = sys.argv[1] if len(sys.argv) > 1 else "example.com"
+def run(target):
+    print("[ENGINE] Starting:", target)
 
-print("[ENGINE] Running recon for:", target)
+    result = {
+        "target": target,
+        "timestamp": datetime.utcnow().isoformat(),
+        "status": "ok",
+        "modules": ["subfinder", "httpx"]
+    }
+
+    return result
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: run.sh <target>")
+        sys.exit(1)
+
+    result = run(sys.argv[1])
+
+    print(json.dumps(result, indent=2))

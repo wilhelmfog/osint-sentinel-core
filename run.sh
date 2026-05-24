@@ -1,4 +1,7 @@
 #!/bin/bash
 
-source venv/bin/activate
-python3 core/engine.py $1
+set -e
+
+source venv/bin/activate 2>/dev/null || true
+
+python3 core/engine.py "$1"
